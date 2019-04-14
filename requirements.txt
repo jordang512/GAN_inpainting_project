@@ -1,0 +1,5 @@
+gluoncv
+keras
+numpy
+mxnet
+pillow
