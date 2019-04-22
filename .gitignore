@@ -1,5 +1,5 @@
 *.jpg
 *.npy
-generative_inpainting/model_logs
-generative_inpainting/neuralgym_logs
-generative_inpainting/data
+GAN_inpainting_model/model_logs
+GAN_inpainting_model/neuralgym_logs
+GAN_inpainting_model/data
