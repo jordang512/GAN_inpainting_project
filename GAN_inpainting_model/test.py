@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import neuralgym as ng
+import matplotlib.pyplot as plt
 
 from inpaint_model import InpaintCAModel
 
@@ -19,15 +20,9 @@ parser.add_argument('--checkpoint_dir', default='', type=str,
                     help='The directory of tensorflow checkpoint.')
 
 
-
-
-if __name__ == "__main__":
+def test_model(image, mask, output_dir='output_images/output.png', checkpoint_dir='model_logs/release_places2_256'):
     ng.get_gpus(1)
-    args = parser.parse_args()
-
     model = InpaintCAModel()
-    image = cv2.imread(args.image)
-    mask = cv2.imread(args.mask)
 
     assert image.shape == mask.shape
 
@@ -55,12 +50,17 @@ if __name__ == "__main__":
         for var in vars_list:
             vname = var.name
             from_name = vname
-            var_value = tf.contrib.framework.load_variable(args.checkpoint_dir, from_name)
+            var_value = tf.contrib.framework.load_variable(checkpoint_dir, from_name)
             assign_ops.append(tf.assign(var, var_value))
         sess.run(assign_ops)
         print('Model loaded.')
         result = sess.run(output)
-        cv2.imwrite(args.output, result[0][:, :, ::-1])
+        cv2.imwrite(output_dir, result[0][:, :, ::-1])
+        #plt.imsave(output_dir, result[0][:, :, ::-1])
 
-def test_model(image, mask, output='output_images/output.png', checkpoint_dir='model_logs/release_places2_256'):
-    pass
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    image = cv2.imread(args.image)
+    mask = cv2.imread(args.mask)
+    test_model(image, mask, output_dir=args.output, checkpoint_dir=args.checkpoint_dir)
