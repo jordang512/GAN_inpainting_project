@@ -1,0 +1,4 @@
+[INFO  2019-04-24 18:42:27 @__init__.py:79] Set root logger. Unset logger with neuralgym.unset_logger().
+[INFO  2019-04-24 18:42:27 @__init__.py:80] Saving logging to file: neuralgym_logs/20190424184226856808.
+[DEBUG 2019-04-24 18:42:27 @font_manager.py:1362] Using fontManager instance from C:\Users\Jordang512\.matplotlib\fontlist-v300.json
+[DEBUG 2019-04-24 18:42:28 @pyplot.py:211] Loaded backend TkAgg version unknown.

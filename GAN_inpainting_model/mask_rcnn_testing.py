@@ -4,10 +4,10 @@ from PIL import Image
 import sys
 import numpy as np
 
-def get_masks(image):
+def get_masks(x, orig_img):
     net = model_zoo.get_model('mask_rcnn_resnet50_v1b_coco', pretrained=True)
     threshold = 0.5
-    x, orig_img = data.transforms.presets.rcnn.load_test("{}".format(image))
+    #x, orig_img = data.transforms.presets.rcnn.transform_test(image)
     ids, scores, bboxes, masks = [xx[0].asnumpy() for xx in net(x)]
 
     # x is index, int(y[0]) is category id
@@ -42,4 +42,4 @@ def get_masks(image):
                             class_names=net.classes, ax=ax)
     plt.show()
 
-    return masks[0]
+    return masks

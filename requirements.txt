@@ -3,3 +3,5 @@ keras
 numpy
 mxnet
 pillow
+git+https://github.com/JiahuiYu/neuralgym
+opencv-python
