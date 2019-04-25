@@ -6,11 +6,10 @@ from scipy.signal import convolve2d
 import numpy as np
 import cv2
 
-def expand_masks(masks):
-	maxval = np.amax(masks)
-	kernel = np.ones((11, 11))
+def expand_masks(masks, ksize):
+	kernel = np.ones((ksize, ksize))
 	expanded = convolve2d(masks, kernel, mode='same')
-	return (expanded >= maxval) * 255
+	return (expanded > 0) * 255
 
 def erase_masks(fpath):
 	x, im = downsize_file(fpath)
@@ -19,7 +18,7 @@ def erase_masks(fpath):
 		compiled_mask = np.amax(masks, axis=0)
 	else:
 		compiled_mask = masks
-	expand_masks(compiled_mask) #convolve with a 11 x 11 kernel to expand masks for inpainting
+	compiled_mask = expand_masks(compiled_mask, 21) #convolve with a 11 x 11 kernel to expand masks for inpainting
 	compiled_mask = np.array([compiled_mask for _ in range(3)])
 	compiled_mask = np.moveaxis(compiled_mask, 0, -1)
 	#compiled_mask = compiled_mask * 255. / np.amax(compiled_mask)
