@@ -1,1 +1,1 @@
-Usage: cd into the model directory. When running the command `python3 inpainting_pipeline.py`, the program will run and process an image called `test.jpg`. The user will be prompted to select a category of object to remove. 
+Usage: cd into the `GAN_inpainting_model` directory. When running the command `python3 inpainting_pipeline.py`, the program will run and process an image called `test.jpg`. The user will be prompted to select a category of object to remove. 
